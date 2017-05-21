@@ -39,43 +39,43 @@ namespace Lab11
             return result;
             //return countries.Where(c => c.Continent == continent).Aggregate<Country, double>(0, (current, c) => current + c.Population);
         }
-        
 
-        protected static int SelectorY(string[] items)
+
+        protected static int SelectorY (string[] items)
         {
-            Console.ResetColor();
-            Console.CursorVisible = false;
-            int top = Console.CursorTop, left = 4;
+            ResetColor();
+            CursorVisible = false;
+            int top = CursorTop, left = 4;
             int currentSelection = 0, previousSelection = 1;
 
-            for (var i = 0; i < items.Length; i++)
+            for (int i = 0; i < items.Length; i++)
             {
-                Console.SetCursorPosition(left, top + i);
-                Console.WriteLine(items[i]);
+                SetCursorPosition(left, top + i);
+                WriteLine(items[i]);
             }
 
             bool selected = false;
             do
             {
-                Console.SetCursorPosition(left, top + previousSelection);
-                Console.WriteLine(items[previousSelection]);
+                SetCursorPosition(left, top + previousSelection);
+                WriteLine(items[previousSelection]);
 
-                Console.SetCursorPosition(left, top + currentSelection);
+                SetCursorPosition(left, top + currentSelection);
                 {
-                    var temp = Console.BackgroundColor;
-                    Console.BackgroundColor = Console.ForegroundColor;
-                    Console.ForegroundColor = temp;
+                    ConsoleColor temp = BackgroundColor;
+                    BackgroundColor = ForegroundColor;
+                    ForegroundColor = temp;
                 }
-                Console.WriteLine(items[currentSelection]);
+                WriteLine(items[currentSelection]);
                 {
-                    var temp = Console.BackgroundColor;
-                    Console.BackgroundColor = Console.ForegroundColor;
-                    Console.ForegroundColor = temp;
+                    ConsoleColor temp = BackgroundColor;
+                    BackgroundColor = ForegroundColor;
+                    ForegroundColor = temp;
                 }
 
 
                 previousSelection = currentSelection;
-                switch (Console.ReadKey(true).Key)
+                switch (ReadKey(true).Key)
                 {
                     case ConsoleKey.DownArrow:
                         currentSelection++;
@@ -94,26 +94,26 @@ namespace Lab11
                     currentSelection = 0;
             } while (!selected);
 
-            Console.CursorTop = top + items.Length;
+            CursorTop = top + items.Length;
             ClearLines(items.Length);
-            Console.SetCursorPosition(left, top);
-            Console.WriteLine(items[currentSelection]);
+            SetCursorPosition(left, top);
+            WriteLine(items[currentSelection]);
 
-            Console.CursorTop++;
-            Console.CursorVisible = true;
+            CursorTop++;
+            CursorVisible = true;
             return currentSelection;
         }
-        protected static void ClearLines(int numberOfLines)
+        protected static void ClearLines (int numberOfLines)
         {
-            Console.CursorTop -= numberOfLines;
+            CursorTop -= numberOfLines;
             for (int i = 0; i < numberOfLines; i++)
             {
-                for (int j = 0; j < Console.WindowWidth - 1; j++)
-                    Console.Write(" ");
-                Console.CursorTop++;
-                Console.CursorLeft = 0;
+                for (int j = 0; j < WindowWidth - 1; j++)
+                    Write(" ");
+                CursorTop++;
+                CursorLeft = 0;
             }
-            Console.CursorTop -= numberOfLines;
+            CursorTop -= numberOfLines;
         }
 
 
@@ -125,10 +125,12 @@ namespace Lab11
             var m = new Monarchy("1",1110,"Россия","Путин");
             CountryList.Add(m);
             WriteLine(m);
+
             var m1 = (Monarchy)m.Clone();
             CountryList.Add(m1);
             WriteLine(m1);
             WriteLine();
+
             m1.Population = 9000;
             m1.Name = "Украина";
             m1.Ruler = "Порошенко";
@@ -144,11 +146,14 @@ namespace Lab11
             WriteLine(uk);
             CountryList.Add(uk);
             WriteLine();
+
             var new_uk = (Kingdom)uk.Clone();
             WriteLine(new_uk);
+
             new_uk.King = "Чарльз???";
             new_uk.Population = 44445;
             WriteLine(new_uk);
+
             CountryList.Add(new_uk);
             WriteLine();
 
@@ -156,6 +161,7 @@ namespace Lab11
             var america = new Republic
                 ("3", 12345,"америка","Трамп",new []{"номер 1","номер 2","номер 3"});
             CountryList.Add(america);
+
             var brazil = new Monarchy
                 ("3",11111,"Бразилия","Главный чел Бразилии");
             CountryList.Add(brazil);
