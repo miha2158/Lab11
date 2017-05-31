@@ -29,6 +29,7 @@ namespace Lab11
             }
             //return countries.Select(c => c as Monarchy).Select(t => t?.Ruler);
         }
+
         protected static ulong
             ContinentPeople(IEnumerable<Country> countries, string continent)
         {

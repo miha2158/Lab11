@@ -11,7 +11,7 @@ namespace Countries_Lab11
         object Clone ();
     }
 
-    public abstract class Country: IClone
+    public abstract class Country: IClone, ICloneable
     {
         private string NameValue;
         public string Name
@@ -34,6 +34,12 @@ namespace Countries_Lab11
         {
             get => RulerValue;
             set => RulerValue = value.Trim().ToLower();
+        }
+
+        public override int GetHashCode()
+        {
+            return ((decimal)Name.GetHashCode() + Population.GetHashCode() + Continent.GetHashCode() + Ruler.GetHashCode())
+                .GetHashCode();
         }
 
         public abstract object Clone();
