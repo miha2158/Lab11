@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Countries_Lab11
         object Clone ();
     }
 
-    public abstract class Country: IClone, ICloneable
+    public abstract class Country: IClone, ICloneable, IComparable
     {
         private string NameValue;
         public string Name
@@ -41,6 +42,17 @@ namespace Countries_Lab11
             return ((decimal)Name.GetHashCode() + Population.GetHashCode() + Continent.GetHashCode() + Ruler.GetHashCode())
                 .GetHashCode();
         }
+
+        #region comparers
+        
+        public int CompareTo(object obj)
+        {
+            Country p = obj as Country;
+
+            return String.Compare(NameValue, p?.NameValue);
+        }
+
+        #endregion
 
         public abstract object Clone();
 
