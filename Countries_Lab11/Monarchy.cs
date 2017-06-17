@@ -2,15 +2,12 @@
 {
     public class Monarchy : Country
     {
-        public Monarchy(string Continent, ulong Population, string Name, string Ruler)
+        public Monarchy(string Continent, ulong Population, string Name, string Ruler): 
+            base(Continent, Population, Name, Ruler)
         {
-            this.Continent = Continent;
-            this.Population = Population;
-            this.Name = Name;
-            this.Ruler = Ruler;
         }
 
-        public override object Clone()
+        public new object Clone()
         {
             var result = new Monarchy(Continent,Population,Name,Ruler);
             return result;

@@ -12,13 +12,21 @@ namespace Countries_Lab11
         object Clone ();
     }
 
-    public abstract class Country: IClone, ICloneable, IComparable
+    public class Country: IClone, ICloneable, IComparable
     {
+        public Country(string Continent,ulong Population, string Name, string Ruler)
+        {
+            this.Continent = Continent;
+            this.Population = Population;
+            this.Name = Name;
+            this.Ruler = Ruler;
+        }
+        
         private string NameValue;
         public string Name
         {
-            get => NameValue;
-            set => NameValue = value.Trim().ToLower();
+            get { return NameValue; }
+            set { NameValue = value.Trim().ToLower(); }
         }
 
         public ulong Population;
@@ -26,15 +34,21 @@ namespace Countries_Lab11
         private string ContinentValue;
         public string Continent
         {
-            get => ContinentValue;
-            set => ContinentValue = value.Trim().ToLower();
+            get { return ContinentValue; }
+            set { ContinentValue = value.Trim().ToLower();}
         }
 
         private string RulerValue;
         public string Ruler
         {
-            get => RulerValue;
-            set => RulerValue = value.Trim().ToLower();
+            get { return RulerValue; }
+            set { RulerValue = value.Trim().ToLower(); }
+        }
+
+
+        public override bool Equals(object obj)
+        {
+            return (CompareTo(obj) == 1);
         }
 
         public override int GetHashCode()
@@ -49,12 +63,20 @@ namespace Countries_Lab11
         {
             Country p = obj as Country;
 
-            return String.Compare(NameValue, p?.NameValue);
+            int c1 = string.Compare(Name, p?.Name);
+            int c2 = string.Compare(Continent, p?.Continent);
+            int c3 = string.Compare(Ruler, p?.Ruler);
+            int c4 = Population.CompareTo(p?.Population);
+
+            return c1 != 0 ? c1: c2 != 0 ? c2: c3 != 0 ? c3: c4;
         }
 
         #endregion
 
-        public abstract object Clone();
+        public object Clone()
+        {
+            return new Country(Continent, Population,Name,Ruler);
+        }
 
         public override string ToString ()
         {

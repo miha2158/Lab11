@@ -4,15 +4,15 @@ namespace Countries_Lab11
     {
         public string King
         {
-            get => Ruler;
-            set => Ruler = value;
+            get { return Ruler; }
+            set { Ruler = value; }
         }
 
         public Kingdom(string Continent, ulong Population, string Name, string King)
             : base(Continent, Population, Name, King) { }
 
 
-        public override object Clone()
+        public new object Clone()
         {
             var result = new Kingdom(Continent, Population, Name, King);
             return result;
